@@ -16,8 +16,7 @@ public class AddemployeeController {
 
     @GetMapping("/employeeAdd")
     public String greetingForm(Model model) {
-        model.addAttribute("employeeRole", new EmployeeRoles());
-        return "employeeRole";
+    	return "/WEB-INF/views/recordspage.jsp";
     }
     @RequestMapping("/patient")
     @PostMapping("/patient")

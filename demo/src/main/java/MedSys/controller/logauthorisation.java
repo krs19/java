@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 //import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -22,8 +24,7 @@ public class logauthorisation {
 @RequestMapping ("/")
 	
 	public String index() { 
-		System.out.println("case 3");
-		return "/WEB-INF/views/admin.jsp";
+		return "/WEB-INF/views/index.jsp";
 		
 		
 	}
@@ -41,27 +42,22 @@ public class logauthorisation {
 	//	}
 		
 		
-		@RequestMapping (value="/loginattempt", method=RequestMethod.GET)
 		
-		public String successLogin() { 
-	        Employee authEmployee = (Employee) SecurityContextHolder.getContext().getAuthentication().getPrincipal();  
-	        MedSys.domain.Employee employee = employeeRepo.findByusername(authEmployee.getUsername());
-	        String view;
-	        switch (employee.getRoleID().getJob_role()){
-	        	case "ADMIN":
-	        		view = "/admin.jsp";
-	        		System.out.println("case 1");
-	        		break;
-	        
-	        	default: 
-	        		view = "/WEB-INF/views/recordspage.jsp"; 
-	        		System.out.println("case 2");
-	        		break;
-	        }
-	  
-			return view;
+		  @RequestMapping(method = RequestMethod.POST)
+		  public String submit(Model model, @ModelAttribute("employee") Employee employee) {
+		    if (employee != null && employee.getUsername() != null & employee.getPassword() != null) {
+		      if (employee.getUsername().equals("Admin")) {
+		        model.addAttribute(employee.getUsername());
+				return "/WEB-INF/views/admin.jsp";
+		      } else {
+		        model.addAttribute("error", "Invalid Details");
+				return "/WEB-INF/views/landing.jsp";
+		      }
+		    } else {
+		      model.addAttribute("error", "Please enter Details");
+				return "/WEB-INF/views/landing.jsp";
 		}
 
 		
-		
+		  }
 }

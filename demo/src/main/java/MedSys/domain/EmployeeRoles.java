@@ -1,5 +1,6 @@
 package MedSys.domain;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -15,22 +16,27 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity(name = "EmployeeRoles")
 public class EmployeeRoles {
 	
 	@Id
 
-	@GeneratedValue  (strategy = GenerationType.TABLE)
 	
 	
-	public int ID;
+	public int entryroleID;
 	
 	
+
+	
+
+
+
 
 	@OneToMany(cascade = CascadeType.ALL)
 	
-	public Set<Employee> jobRoles ;
+	public Set<Employee> jobRoles;
 
 
 
@@ -39,28 +45,30 @@ public class EmployeeRoles {
 
 
 
-	@Column 
-	
-	public String job_role;
 	
 	@Column
 	
+
 	public String first_name;
 	
 	@Column
 	
+
 	public String last_name;
 	
 	@Column
 	
+
 	public String expertise;
 	
 	@Column
 	
+
 	public String addressofwork;   
 	
 	@Column
 	
+
 	public int dob;
 	
 	
@@ -72,25 +80,9 @@ public class EmployeeRoles {
 	}
 
 
-	public EmployeeRoles(String jobRole) {
-		this.job_role = jobRole;
-	}
 
 
 
-
-
-
-	public String getJob_role() {
-		return job_role;
-	}
-
-
-
-
-	public void setJob_role(String job_role) {
-		this.job_role = job_role;
-	}
 
 
 
@@ -149,27 +141,21 @@ public class EmployeeRoles {
 	}
 	
 	
-	public int getID() {
-		return ID;
-	}
-
-
-
-
-	public void setID(int iD) {
-		ID = iD;
-	}
-
-
-
+	
 
 	public Set<Employee> getJobRoles() {
 		return jobRoles;
 	}
 
 	
+	public int getEntryroleID() {
+		return entryroleID;
+	}
 
 
+	public void setEntryroleID(int entryroleID) {
+		this.entryroleID = entryroleID;
+	}
 
 
 	public void setJobRoles(Set<Employee> jobRoles) {

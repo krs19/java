@@ -1,4 +1,6 @@
 package MedSys.domain;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +13,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import MedSys.domain.EmployeeRoles;
 
@@ -21,29 +27,56 @@ import MedSys.domain.EmployeeRoles;
 public class Employee {
 	
 	@Id
+	@NotNull(message = "Cannot leave empty")
+
+
+
 	public int employeeID;
 	
 	
 	
+	@OneToMany()
 	
+	public Set<VisitHistory> visits;
+
 	
 
-	@OneToOne(cascade = CascadeType.ALL)  
-	
+	@ManyToOne(cascade = CascadeType.ALL)  
 	public EmployeeRoles roleID;
 	
 
 
 	@Column 
-	
+	@NotNull
 	public String username;
 	
 	@Column
+	@NotNull
+	@Size(min = 1, message = "minimum 6 characters")
 	
 	public String password;
 
+
+
+
+
+
+	public String getRolesID() {
+		return rolesID;
+	}
+
+	public void setRolesID(String rolesID) {
+		this.rolesID = rolesID;
+	}
+
+	private String rolesID;
+
 	public Employee() {
 		super();
+	}
+	
+	public Employee(String rolesID) {
+		this.rolesID = rolesID;
 	}
 
 	public int getEmployeeID() {

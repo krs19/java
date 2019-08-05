@@ -1,5 +1,8 @@
 package MedSys;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,7 +27,6 @@ public class MedSysApplication implements CommandLineRunner{
 	@Autowired
 	private EmployeeRepository employeeRepo;		
     
-
 	    
 
 
@@ -37,18 +39,33 @@ public class MedSysApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		
 		BCryptPasswordEncoder pe = new  BCryptPasswordEncoder();
+
+
 		Employee employee = new Employee();
 		employee.setUsername("Admin");
 		employee.setEmployeeID(111);
-		employee.setPassword(pe.encode("passwordforall1"));
+		employee.setPassword(pe.encode("password"));
 		EmployeeRoles role = new EmployeeRoles();
-		role.getJobRoles().add(employee);
+		role.setEntryroleID(1000);;
+		
 		employee.setRoleID(role);
+
+		Set<Employee> jobRoles = new HashSet<Employee>();
+		 jobRoles.add(employee);
+
+		
+
+		
+
 		employeeRepo.save(employee);
 	
+
+		
+		
 		}
 	
 
+	
 	 
 }
 

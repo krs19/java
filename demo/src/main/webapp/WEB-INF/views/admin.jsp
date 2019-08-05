@@ -1,47 +1,53 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<meta charset="utf-8">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Spring MVC Form Validation</title>
 <style>
-
-
+.error {
+color: red
+}
 </style>
-
-    <title>Getting Started: Handling Form Submission</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-	
-	<body>
-		<div>
-			<div class="banner">
-				<a class="title" th:href="@{/}">ITForum</a>
-				<div sec:authorize="hasAuthority('ADMIN')" class="bannerButtons"><a th:href="@{/admin}">Admin</a></div>
-				<div sec:authorize="isAnonymous()" class="bannerButtons"><a th:href="@{/register}">Register</a></div>
-				<div sec:authorize="isAnonymous()" class="bannerButtons"><a th:href="@{/login}">Login</a></div>
-			</div>
-			
-			<div class="formSection">
-				<div class="form">
-					<form method="POST" th:action="@{/register}" th:object="${user}">
-
-						<input type="text" th:field="*{nick}" placeholder="nick" th:class="${#fields.hasErrors('nick')}? 'error' : 'text'"/>
-						<input type="text" th:field="*{email}" placeholder="email" th:class="${#fields.hasErrors('email')}? 'error' : 'text'"/>
-						<input type="password" th:field="*{password}" placeholder="password" th:class="${#fields.hasErrors('password')}? 'error' : 'text'"/>
-							
-						<input class="submit" type="submit" value = "register"/>
-							
-						<ul class="errors">
-							<li th:each="err : ${#fields.errors('*')}" th:text="${err}">Validation error</li>	
-						</ul>
-					</form>
-				</div>
-			</div>
-		</div>
-	</body>
+<body>
+<form:form action="processForm" modelAttribute="registration">
+<div align="center">
+<h2>Register Here</h2>
+<table>
+<tr>
+<td>First name</td>
+<td><form:input type="text" path="firstName" /></td>
+<td><form:errors path="firstName" cssClass="error" /></td>
+</tr>
+<tr>
+<td>Last name (*)</td>
+<td><form:input type="text" path="lastName" /></td>
+<td><form:errors path="lastName" cssClass="error" /></td>
+</tr>
+<tr>
+<td>Age </td>
+<td><form:input type="text" path="age" /></td>
+<td><form:errors path="age" cssClass="error" /></td>
+</tr>
+<tr>
+<td>Email </td>
+<td><form:input type="text" path="email" /></td>
+<td><form:errors path="email" cssClass="error" /></td>
+</tr>
+<tr>
+<td>Coupon Code </td>
+<td><form:input type="text" path="couponCode" /></td>
+<td><form:errors path="couponCode" cssClass="error" /></td>
+</tr>
+<tr>
+<td></td>
+<td><input type="submit" value="Submit" /></td>
+</tr>
+</table>
+</div>
+</form:form>
+</body>
 </html>
