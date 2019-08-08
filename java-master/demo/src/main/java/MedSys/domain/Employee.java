@@ -27,7 +27,6 @@ import MedSys.domain.EmployeeRoles;
 public class Employee {
 	
 	@Id
-	@NotNull(message = "Cannot leave empty")
 
 
 
@@ -35,6 +34,12 @@ public class Employee {
 	
 	
 	
+	@OneToMany(cascade = CascadeType.ALL)
+	public Set<EmployeeRoles> jobID;
+
+	
+	
+
 	@OneToMany()
 	
 	public Set<VisitHistory> visits;
@@ -47,12 +52,10 @@ public class Employee {
 
 
 	@Column 
-	@NotNull
 	public String username;
 	
 	@Column
-	@NotNull
-	@Size(min = 1, message = "minimum 6 characters")
+//	@Size(min = 1, message = "minimum 6 characters")
 	
 	public String password;
 
@@ -113,5 +116,20 @@ public class Employee {
 		this.password = password;
 	}
 	
-	
+	public Set<EmployeeRoles> getJobID() {
+		return jobID;
+	}
+
+	public void setJobID(Set<EmployeeRoles> jobID) {
+		this.jobID = jobID;
+	}
+
+	public Set<VisitHistory> getVisits() {
+		return visits;
+	}
+
+	public void setVisits(Set<VisitHistory> visits) {
+		this.visits = visits;
+	}
+
 }

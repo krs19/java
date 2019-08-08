@@ -13,7 +13,7 @@ import MedSys.domain.EmployeeRoles;
 
 public interface EmployeeRepository extends CrudRepository <Employee, Integer> {
 		
-		Set<Employee> findByemployeeID(int employeeID);
+		public int findByemployeeID(int employeeID);
 		public Employee findByusername(String username);
 		public EmployeeRoles findByroleID(EmployeeRoles roleID);
 		

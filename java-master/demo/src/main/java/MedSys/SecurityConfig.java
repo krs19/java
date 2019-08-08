@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired 
 	private UserDetailsService userDetailsService; 
     public void configureGlobal(AuthenticationManagerBuilder amb) throws Exception {
-    	PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		amb.userDetailsService(userDetailsService).passwordEncoder(encoder);
     	amb.inMemoryAuthentication().withUser("Admin").password("password").authorities("Admin");
 		
@@ -38,15 +38,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	http.authorizeRequests().antMatchers("/index").permitAll();
     	
     	http.authorizeRequests().antMatchers("/WEB-INF/views/admin.jsp").access("hasRole ('Admin')").and()
-		.formLogin().loginPage("/")
-		.defaultSuccessUrl("/loginattempt")
+		.formLogin().loginPage("/index")
+		.defaultSuccessUrl("/addemployee")
 		.loginProcessingUrl("/login")
 		.failureUrl("/WEB-INF/views/recordspage.jsp")
-		.usernameParameter("userName").passwordParameter("password")				
+		.usernameParameter("username").passwordParameter("password")				
 	.and()
 		.logout().logoutSuccessUrl("/login?logout").permitAll(); 
 
+    	http.authorizeRequests().antMatchers("/WEB-INF/views/recordspage.jsp").access("hasRole('Doctor','Nurse','Pharmacist','Admin') ");
+    	
 }
+    
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     	
     @Bean

@@ -28,7 +28,7 @@ public class MedSysApplication implements CommandLineRunner{
 	@Autowired
 	private EmployeeRepository employeeRepo;		
     
-	    
+	private EmployeeRolesRepository empRoleRepo;
 
 
 
@@ -50,17 +50,13 @@ public class MedSysApplication implements CommandLineRunner{
 		role.setEntryroleID("Admin");;
 		
 		employee.setRoleID(role);
-
 		Set<Employee> jobRoles = new HashSet<Employee>();
 		 jobRoles.add(employee);
+		 role.setEmpID(employee);
 
-		
-
-		
 
 		employeeRepo.save(employee);
 	
-
 		
 		
 		}

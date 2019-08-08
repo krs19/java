@@ -15,6 +15,7 @@ public interface EmployeeRolesRepository extends CrudRepository <EmployeeRoles, 
 	
 		public EmployeeRoles findByentryroleID(String entryroleID);
 		public EmployeeRoles findByexpertise(String expertise);
+		public Employee findByempID(Employee empID);
 
 		
 		

@@ -41,11 +41,13 @@ public class EmployeeRoles {
 
 
 	
+	@ManyToOne(cascade = CascadeType.ALL)  
+
+	public Employee empID;
 
 
 
 
-	
 	@Column
 	
 
@@ -72,8 +74,16 @@ public class EmployeeRoles {
 	public int dob;
 	
 	
-
+	@Column
 	
+	public String gender;
+	
+
+
+
+
+
+
 
 	public EmployeeRoles() {
 		super();
@@ -170,6 +180,36 @@ public class EmployeeRoles {
 	public void setDob(int dob) {
 		this.dob = dob;
 	}
+	
+
+	public String getGender() {
+		return gender;
+	}
+
+
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+
+	
+	public Employee getEmpID() {
+		return empID;
+	}
+
+
+
+
+
+
+
+
+
+	public void setEmpID(Employee empID) {
+		this.empID = empID;
+	}
+
 
 
 	

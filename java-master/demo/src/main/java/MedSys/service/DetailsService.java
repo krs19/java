@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,6 +20,7 @@ import org.springframework.security.core.userdetails.User;
 
 
 import MedSys.domain.Employee;
+import MedSys.domain.EmployeeRoles;
 import MedSys.repository.EmployeeRepository;
 import MedSys.MedSysApplication;
 
@@ -28,7 +31,8 @@ import MedSys.MedSysApplication;
 public class DetailsService implements UserDetailsService {
 	
 	
-
+	   @Resource
+	    private EmployeeRoles userDataService;
 	
 		
 		@Autowired
@@ -85,6 +89,22 @@ public class DetailsService implements UserDetailsService {
 			
 			return roles;
 		}
+		
+
+	    public void saveUserData(RegistryCredentials credentials) {
+	        UserData current = userDataService.getUserData(credentials
+	                .getUsername());
+	        current.setCity(credentials.getCity());
+	        current.setEmail(credentials.getEmail());
+	        current.setPassword(credentials.getPassword());
+	        current.setStreet(credentials.getStreet());
+	        current.setFirstname(credentials.getFirstname());
+	        current.setLastname(credentials.getLastname());
+	        current.setUsername(credentials.getUsername());
+	        current.setRegistered(new Date());
+	        Long activationKey = userDataService.updateUserData(current);
+	        mailer.sendSubscriptionEmail(current, activationKey);
+	    }
 		
 		private static List<GrantedAuthority> getGrantedAuthorities(List<String> roles) {
 			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();

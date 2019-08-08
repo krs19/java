@@ -14,7 +14,7 @@ uri="http://www.springframework.org/tags/form" prefix="form"%>
 <table>
 <tr>
 <td>User Name</td>
-<td><input type="text" name="userName" /></td>
+<td><input type="text" name="username" /></td>
 </tr>
 <tr>
 <td>Password</td>

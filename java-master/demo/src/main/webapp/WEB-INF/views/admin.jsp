@@ -5,7 +5,7 @@ pageEncoding="UTF-8"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Spring MVC Form Validation</title>
+<title>Register Employee</title>
 <style>
 .error {
 color: red
@@ -13,40 +13,55 @@ color: red
 </style>
 </head>
 <body>
-<form:form action="processForm" >
+
+<form:form name="regForm" action="" method='POST'>
 <div align="center">
-<h2>Register Here</h2>
 <table>
 <tr>
-<td>First name</td>
-<td><form:input type="text" path="firstName" /></td>
-<td><form:errors path="firstName" cssClass="error" /></td>
+<td>User Name</td>
+<td><input type="text" name="username" /></td>
 </tr>
 <tr>
-<td>Last name (*)</td>
-<td><form:input type="text" path="lastName" /></td>
-<td><form:errors path="lastName" cssClass="error" /></td>
+<td>Password</td>
+<td><input type="password" name="password" /></td>
 </tr>
 <tr>
-<td>Age </td>
-<td><form:input type="text" path="age" /></td>
-<td><form:errors path="age" cssClass="error" /></td>
+<td>First Name</td>
+<td><input type="text" name="firstname" /></td>
 </tr>
+
 <tr>
-<td>Email </td>
-<td><form:input type="text" path="email" /></td>
-<td><form:errors path="email" cssClass="error" /></td>
+<td></td>
+<td><input type="text" name="lastname" /></td>
 </tr>
+
 <tr>
-<td>Coupon Code </td>
-<td><form:input type="text" path="couponCode" /></td>
-<td><form:errors path="couponCode" cssClass="error" /></td>
+<td>User Name</td>
+<td><input type="text" name="expertise" /></td>
 </tr>
+
+<tr>
+<td>User Name</td>
+<td><input type="text" name="addressofwork" /></td>
+</tr>
+
+<tr>
+<td>Date Of Birth</td>
+<td><input type="date" name="dob" /></td>
+</tr>
+
+<tr>
+<td>Sex/Gender</td>
+<td><input type="text" name="gender" /></td>
+</tr>
+
 <tr>
 <td></td>
 <td><input type="submit" value="Submit" /></td>
 </tr>
 </table>
+<div></div>
+
 </div>
 </form:form>
 </body>
